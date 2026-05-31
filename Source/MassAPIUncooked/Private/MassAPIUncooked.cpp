@@ -6,7 +6,7 @@
 
 #include "MassAPIUncooked.h"
 #include "Slate/MassAPIPinFactory.h"
-#include "Slate/MassAPIFlagPropertyCustomization.h"
+#include "Slate/MassBattleFlagPropertyCustomization.h"
 #include "EdGraphUtilities.h"
 #include "PropertyEditorModule.h"
 #include "Modules/ModuleManager.h"    // Required for IMPLEMENT_MODULE
@@ -22,8 +22,8 @@ void FMassAPIUncookedModule::StartupModule()
 
 	// Register property customization for query struct flag arrays | 注册查询结构体旗标数组属性定制
 	FPropertyEditorModule& PropertyModule = FModuleManager::LoadModuleChecked<FPropertyEditorModule>("PropertyEditor");
-	PropertyModule.RegisterCustomPropertyTypeLayout("FEntityQuery", FOnGetPropertyTypeCustomizationInstance::CreateStatic(&FMassAPIFlagPropertyCustomization::MakeInstance));
-	PropertyModule.RegisterCustomPropertyTypeLayout("FMassBattleQuery", FOnGetPropertyTypeCustomizationInstance::CreateStatic(&FMassAPIFlagPropertyCustomization::MakeInstance));
+	PropertyModule.RegisterCustomPropertyTypeLayout("FEntityQuery", FOnGetPropertyTypeCustomizationInstance::CreateStatic(&FMassBattleFlagPropertyCustomization::MakeInstance));
+	PropertyModule.RegisterCustomPropertyTypeLayout("FMassBattleQuery", FOnGetPropertyTypeCustomizationInstance::CreateStatic(&FMassBattleFlagPropertyCustomization::MakeInstance));
 }
 
 void FMassAPIUncookedModule::ShutdownModule()

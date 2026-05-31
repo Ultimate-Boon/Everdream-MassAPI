@@ -3,7 +3,7 @@
 * Author: Leroy Works, Ember, All Rights Reserved.
 */
 
-#include "Slate/MassAPIFlagPropertyCustomization.h"
+#include "Slate/MassBattleFlagPropertyCustomization.h"
 
 #if WITH_EDITOR
 #include "MassAPIFlagSettings.h"
@@ -19,12 +19,12 @@
 
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-TSharedRef<IPropertyTypeCustomization> FMassAPIFlagPropertyCustomization::MakeInstance()
+TSharedRef<IPropertyTypeCustomization> FMassBattleFlagPropertyCustomization::MakeInstance()
 {
-	return MakeShareable(new FMassAPIFlagPropertyCustomization);
+	return MakeShareable(new FMassBattleFlagPropertyCustomization);
 }
 
-void FMassAPIFlagPropertyCustomization::CustomizeHeader(TSharedRef<IPropertyHandle> PropertyHandle, FDetailWidgetRow& HeaderRow, IPropertyTypeCustomizationUtils& CustomizationUtils)
+void FMassBattleFlagPropertyCustomization::CustomizeHeader(TSharedRef<IPropertyHandle> PropertyHandle, FDetailWidgetRow& HeaderRow, IPropertyTypeCustomizationUtils& CustomizationUtils)
 {
 	HeaderRow.NameContent()
 	[
@@ -36,7 +36,7 @@ void FMassAPIFlagPropertyCustomization::CustomizeHeader(TSharedRef<IPropertyHand
 	];
 }
 
-void FMassAPIFlagPropertyCustomization::CustomizeChildren(TSharedRef<IPropertyHandle> PropertyHandle, IDetailChildrenBuilder& ChildBuilder, IPropertyTypeCustomizationUtils& CustomizationUtils)
+void FMassBattleFlagPropertyCustomization::CustomizeChildren(TSharedRef<IPropertyHandle> PropertyHandle, IDetailChildrenBuilder& ChildBuilder, IPropertyTypeCustomizationUtils& CustomizationUtils)
 {
 	uint32 NumChildren = 0;
 	PropertyHandle->GetNumChildren(NumChildren);
@@ -49,7 +49,7 @@ void FMassAPIFlagPropertyCustomization::CustomizeChildren(TSharedRef<IPropertyHa
 		{
 			// Use FDetailArrayBuilder with per-element ComboBox | 使用 FDetailArrayBuilder，每个元素渲染 ComboBox
 			TSharedRef<FDetailArrayBuilder> ArrayBuilder = MakeShareable(new FDetailArrayBuilder(ChildHandle, false, true, true));
-			ArrayBuilder->OnGenerateArrayElementWidget(FOnGenerateArrayElementWidget::CreateSP(this, &FMassAPIFlagPropertyCustomization::OnGenerateFlagArrayElement));
+			ArrayBuilder->OnGenerateArrayElementWidget(FOnGenerateArrayElementWidget::CreateSP(this, &FMassBattleFlagPropertyCustomization::OnGenerateFlagArrayElement));
 			ChildBuilder.AddCustomBuilder(ArrayBuilder);
 		}
 		else
@@ -59,13 +59,13 @@ void FMassAPIFlagPropertyCustomization::CustomizeChildren(TSharedRef<IPropertyHa
 	}
 }
 
-bool FMassAPIFlagPropertyCustomization::IsFlagArrayProperty(const TSharedRef<IPropertyHandle>& ChildHandle) const
+bool FMassBattleFlagPropertyCustomization::IsFlagArrayProperty(const TSharedRef<IPropertyHandle>& ChildHandle) const
 {
 	FString PropName = ChildHandle->GetProperty()->GetName();
 	return PropName.Contains(TEXT("FlagsList")) || PropName.Contains(TEXT("FlagNamesList"));
 }
 
-void FMassAPIFlagPropertyCustomization::OnGenerateFlagArrayElement(TSharedRef<IPropertyHandle> ElementHandle, int32 Index, IDetailChildrenBuilder& ChildrenBuilder)
+void FMassBattleFlagPropertyCustomization::OnGenerateFlagArrayElement(TSharedRef<IPropertyHandle> ElementHandle, int32 Index, IDetailChildrenBuilder& ChildrenBuilder)
 {
 	// Build flag name options from settings | 从设置构建旗标名选项
 	TSharedRef< TArray<FName> > Options = MakeShareable(new TArray<FName>());

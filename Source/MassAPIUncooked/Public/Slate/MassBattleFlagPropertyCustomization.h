@@ -22,7 +22,7 @@ class IDetailChildrenBuilder;
  * | 属性定制：用 FDetailArrayBuilder 为 FEntityQuery/FMassBattleQuery 的 TArray<FName> 旗标数组
  *   每个元素渲染 ComboBox 下拉。
  */
-class MASSAPIUNCOOKED_API FMassAPIFlagPropertyCustomization : public IPropertyTypeCustomization
+class MASSAPIUNCOOKED_API FMassBattleFlagPropertyCustomization : public IPropertyTypeCustomization
 {
 public:
 
